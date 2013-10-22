@@ -1,0 +1,105 @@
+/* basic common style sheet here */
+
+html { 
+    /* set full background picture */
+    background: url(./images/bk.jpg) no-repeat top center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+/* used for the title */
+h3{
+    font: 20px/2 Georgia, Serif; 
+    margin: 0 0 10px 0; 
+    text-align:center;
+}
+
+i{
+    font-size: 11px;
+    letter-spacing: 1.2px;
+    color: #555555;
+}
+
+/* paragrah */
+p { 
+    font: 15px/2 Georgia, Serif; 
+    margin: 0 0 10px 0; 
+    text-indent: 40px; 
+}
+
+#blank {
+    height: 40px;
+}
+
+/* content */
+#page-wrap { 
+    position: relative; 
+    width: 400px; 
+    margin: 10px auto;  /* align to the center */
+    /* margin-top: 40px;
+    margin-left: 25%; */ /* align to left */
+    padding: 18px 36px 18px 36px ; 
+    background: white; 
+    -moz-box-shadow: 0 0 10px black; 
+    -webkit-box-shadow: 0 0 10px black; 
+    border-radius: 8px;
+    box-shadow: 0 0 10px #999999; 
+}
+
+/* bottom menu and information */
+#bottom {
+    position: relative; 
+    width: 440px; 
+    text-align: left;
+
+    margin: 20px auto; /* align to the center */
+    /* margin-top: 30px;
+    margin-left: 25%; */ /* align left */ 
+    
+    padding: 0px 36px 0px 0px;
+    background: white; 
+    -moz-box-shadow: 0 0 20px black; 
+    -webkit-box-shadow: 0 0 20px black; 
+    border-radius: 6px;
+    box-shadow: 0 0 20px #787878; 
+}
+
+/* link decoration */
+a { 
+    text-decoration: none;
+}
+
+a:hover {
+    border-bottom: 1px dotted;
+}
+
+.date{
+    /* date  */
+    font: 13px/2 Georgia, Serif; 
+    margin: 10px 10px 0 0; 
+    text-align: right;
+}
+
+#home {
+    position: fixed;
+    float: left;
+    width:  60px;
+    height: 60px;
+    background: #ABABAB;
+    background: url(./images/home.png) no-repeat center top;
+    border-radius: 50%;
+    opacity: 0.1;
+    
+    -moz-transition: 0.5s ease;
+    -webkit-transition: 0.5s ease;
+    transition: 0.5s ease;
+}
+
+#home:hover{
+    -moz-transition: 0.5s ease;
+    -webkit-transition: 0.5s ease;
+    transition: 0.5s ease;
+    opacity: 0.8;
+}
