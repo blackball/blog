@@ -82,6 +82,10 @@ a:hover {
     text-align: right;
 }
 
+.mp3plaer {
+    float: left;
+}
+
 #home {
     position: fixed;
     float: left;
