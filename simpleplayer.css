@@ -9,7 +9,7 @@
     padding-left: 0;
 }
 .simpleplayer-play-control {
-    background-image: url('images/play.png');
+    background-image: url('images/play.png'); 
     display: block;
     width: 16px;
     height: 16px;
@@ -17,7 +17,7 @@
     position: relative;
 }
 .simpleplayer-stop-control {
-    background-image: url('images/stop.png');
+    background-image: url('images/stop.png'); 
     display: block;
     width: 16px;
     height: 16px;
