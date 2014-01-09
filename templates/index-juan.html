@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>blackball</title>    
+    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="simpleplayer.css" type="text/css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="./js/jquery.simpleplayer.js"></script>
+    <script>
+      $(document).ready(function(){
+      $("#home").click(function(){
+      $("#toggle").toggle(1500);
+      });
+      });
+      $(document).ready(function() {
+      var settings = {
+      progressbarWidth: '0px',
+      progressbarHeight: '0px',
+      progressbarColor: '#ffffff',
+      progressbarBGColor: '#ffffff',
+      defaultVolume: 0.8
+      };
+      $(".player").player(settings);
+      });
+
+    </script>
+
+  </head>
+  <body>
+    <div id="home"></div>
+    <div id="blank"></div>
+
+    <div id="toggle">      
+      <div id="marryme">
+        娟 我愿意陪伴你一辈子 
+      </div>
+      <div id="fixmp3">
+        <audio class="player" autoplay="autoplay" src="./music/lonely.mp3"></audio>
+      </div>
+    </div>
+  </body>
+</html>
