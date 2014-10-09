@@ -1,0 +1,80 @@
+body 
+{
+    background-color: #000000;
+    color:#00D000;
+    margin: 0 0 0 0;
+}
+
+h2
+{
+    margin:0 0 0 0;
+}
+
+#article
+{
+    text-align:left;
+    white-space: pre-line;
+    font: 16px/2 Helvetica, Georgia, Serif;
+    margin-top: 0,auto;
+    /* margin-left: 30%; */
+    width: 33%;
+}
+
+#menu
+{
+    margin: 0 0;
+}
+
+#menu a 
+{
+    background-color: #333;
+    margin-right: 18px;
+    font-size:17px;
+    text-decoration: none; 
+    color: #00D000;
+}
+
+#menu a:hover 
+{
+    background-color: #000;
+    color: #00F000;
+}
+
+#menu a:visited
+{
+    color: #006000;
+}
+
+a 
+{
+    background-color: #333;
+    text-decoration: none; 
+    color: #00D000;
+}
+
+a:hover 
+{
+    background-color: #000;
+    color: #00F000;
+}
+
+div
+{
+    margin-top: 0;
+}
+
+#home {
+    margin-top:0;
+    width:  60px;
+    height: 60px;
+    background: url(home.png) no-repeat center top;
+    border-radius: 50%;
+/*opacity: 0.7;*/
+}
+
+#code
+{
+    margin-top: 10px;
+    margin-bottom: 5px;
+    white-space: normal;
+}

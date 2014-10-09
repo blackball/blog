@@ -1,0 +1,10 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Blackball</title><link rel="stylesheet" href="../css/style.css"><link rel="shortcut icon" href="../favicon.ico" /></head><body><center><div id="article">
+        <a href="../index.html"><div id="home"></div></a>
+	<h2>SCons</h2>
+	记录一下使用SCons替代Makefile来构建项目的简单方法。
+	我的项目目录结构是这样的：{project：{include， src， test}} 即在project文件夹下面有三个文件夹放代码。include文件夹是暴露出来给外部调用的头文件，src是include的实现文件，test则是这个模块的测试程序，测试程序一般会有很多个。现在使用SCons来构建这个项目。我要达到的目的是当我使用scons（相当于make）编译整个工程之后，我希望在project目录下自动生成一个lib目录存放生成的库文件，生成bin文件夹存放test的可执行文件。第一步，在project目录下创建一个SConstruct文件，然后在src和test文件夹下面分别创建SConscript文件，内容如下：<div id="code"><script src="https://gist.github.com/blackball/7a35cb4e376efebd9064.js"></script></div>第一个是顶层的控制脚本，SCons脚本实际上是Python代码。关于脚本的基本意思，可以参考注释。
+	在使用git进行版本管理的时候，有一点需要注意：为了避免git自动将scons的数据文件也加进去了，需要在project目录下面创建.gitignore文件内容加上一行“.sconsign.dblite”。
+	对于这样一个库的构建，上面十行左右SCons脚本就够了。网上很少看到完整的例子。官方Manual太冗长了，相信许多人读起来会十分不耐烦，所以就在这里记录一下。
+
+2014-10-09
+</div></center></body></html>
