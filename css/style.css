@@ -1,8 +1,9 @@
 body 
 {
-    background-color: #000000;
+    background-color: #222;
     color:#00D000;
     margin: 0 0 0 0;
+    letter-spacing: 1px;
 }
 
 h2
@@ -14,15 +15,16 @@ h2
 {
     text-align:left;
     white-space: pre-line;
-    font: 16px/2 Helvetica, Georgia, Serif;
+    font: 14px/2 Helvetica, Georgia, Serif;
     margin-top: 0,auto;
     /* margin-left: 30%; */
-    width: 33%;
+    width: 28%;
 }
 
 #menu
 {
-    margin: 0 0;
+    white-space: nowrap;
+    margin: 50px 0 10px 0;
 }
 
 #menu a 
@@ -36,7 +38,7 @@ h2
 
 #menu a:hover 
 {
-    background-color: #000;
+    background-color: #222;
     color: #00F000;
 }
 
@@ -45,7 +47,7 @@ h2
     color: #006000;
 }
 
-a 
+a
 {
     background-color: #333;
     text-decoration: none; 
@@ -54,7 +56,7 @@ a
 
 a:hover 
 {
-    background-color: #000;
+    background-color: #222;
     color: #00F000;
 }
 
@@ -63,13 +65,14 @@ div
     margin-top: 0;
 }
 
-#home {
+#home
+{
     margin-top:0;
-    width:  60px;
-    height: 60px;
-    background: url(home.png) no-repeat center top;
+    width:  70px;
+    height: 70px;
+    background: url(logo.png) no-repeat center top;
     border-radius: 50%;
-/*opacity: 0.7;*/
+    /*opacity: 0.7;*/
 }
 
 #code
@@ -77,4 +80,10 @@ div
     margin-top: 10px;
     margin-bottom: 5px;
     white-space: normal;
+}
+
+#bottom
+{
+    text-decoration: none;
+    background-color: #222;
 }
