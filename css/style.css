@@ -18,12 +18,12 @@ h2
     font: 14px/2 Helvetica, Georgia, Serif;
     margin-top: 0,auto;
     /* margin-left: 30%; */
-    width: 28%;
+    width: 30%;
 }
 
 #menu
 {
-    white-space: nowrap;
+    white-space: normal;
     margin: 50px 0 10px 0;
 }
 
