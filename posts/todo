@@ -1,0 +1,18 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>blackball</title><link rel="stylesheet" href="../css/style.css"><link rel="shortcut icon" href="../favicon.ico" /></head><body><center><div id="article">
+        <a href="../index.html"><div id="home"></div></a>
+<h2>TODO</h2>
+
+** Find the best parameters for a blackbox module. 
+
+** A remote 3D scene viewer
+
+** Camera calibration with different models 
+
+** Point pair feature matching algorithm (with the new sampling strategies from ECCV2016 paper)
+
+** A fast forward cnn library based on dynamic opt code generation [explore]
+
+** An fast autodiff library based on dynamic opt code generation [explore].
+
+2013-12-01
+</div></center></body></html>
