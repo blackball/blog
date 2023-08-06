@@ -11,14 +11,29 @@ h2
     margin:0 0 0 0;
 }
 
-#article
+#article {
+    text-align: left; 
+    font: 17px/2 Helvetica, Georgia, Serif;
+    width: 35%;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-left:1px dotted #555;
+    border-right: 1px dotted #555;
+}
+
+#homelogo
 {
-    text-align:left;
-    white-space: pre-line;
-    font: 14px/2 Helvetica, Georgia, Serif;
-    margin-top: 0,auto;
-    /* margin-left: 30%; */
-    width: 45%;
+    margin-top:30px;
+    margin-bottom: 20px;
+    width:  70px;
+    height: 70px;
+    background: url(logo.png) no-repeat center top;
+    border-radius: 50%;
+    opacity: 0.8;
+}
+
+#bottombox {
+    margin-top: 50px;
 }
 
 #menu
@@ -60,21 +75,6 @@ a:hover
     color: #00F000;
 }
 
-div
-{
-    margin-top: 0;
-}
-
-#home
-{
-    margin-top:0;
-    width:  70px;
-    height: 70px;
-    background: url(logo.png) no-repeat center top;
-    border-radius: 50%;
-    opacity: 0.8;
-}
-
 #code
 {
     margin-top: 10px;
@@ -82,8 +82,3 @@ div
     white-space: normal;
 }
 
-#bottom
-{
-    text-decoration: none;
-    background-color: #222;
-}
