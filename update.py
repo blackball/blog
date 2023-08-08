@@ -56,5 +56,7 @@ def update():
         items.append(item.format(nt[0], nt[1]))
     open("index.html", "w").write(index_template.format(" ".join(items)))        
 
+    print("updated: \n" + "\n".join(items))
+    
 if __name__ == '__main__':    
     update()
