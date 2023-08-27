@@ -54,8 +54,10 @@ def update():
     items = []
     for nt in names_and_titles:
         items.append(item.format(nt[0], nt[1]))
-    open("index.html", "w").write(index_template.format(" ".join(items)))        
 
+    # the latest posts first.
+    items.reverse()
+    open("index.html", "w").write(index_template.format(" ".join(items)))        
     print("updated: \n" + "\n".join(items))
     
 if __name__ == '__main__':    
