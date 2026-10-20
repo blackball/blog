@@ -70,11 +70,12 @@ python new_post.py "文章的标题" --serve
   text levels, cinnabar accent `#9a3b2d` used only for the seal, links, and hover.
 - **Home:** the lotus mark and brush tagline sit in one row (mark on the left, tagline on
   the right, with a tiny `墨` seal), followed by a vertical two-column index: date on the
-  left, title on the right, newest first. Personal posts show the full date; public-domain
-  essays show their year. Thin warm rules separate rows. No cards or counts.
-- **Article:** the lotus mark and brush title share one row, with the mark on the left;
-  the body follows immediately. The date/author line sits at the bottom right. There is
-  no return link at the bottom: the mark at the top is the way home.
+  left in `YYYY.MM.DD`, title on the right, newest first. Thin warm rules separate rows.
+  No cards or counts.
+- **Article:** the lotus mark and brush title share one row, with the mark on the left.
+  The title-to-body gap is 2rem, doubled from the previous rhythm. The date/author line
+  sits at the bottom right. There is no return link at the bottom: the mark at the top is
+  the way home.
 - **Article measure:** 680px, about 35 Chinese characters per line. Body text is 19px with
   a 1.85 line-height on desktop and 18px with 1.82 on phones.
 - **Rhythm (borrowed from Kami):** body is left-aligned, never justified, with no
@@ -85,8 +86,8 @@ python new_post.py "文章的标题" --serve
   the site statement and article title.
 - **Chrome:** flat paper, no gradient, no shadows, no decorative rules or side bars,
   no motion. Only one hairline (footer) and one cinnabar seal.
-- **Footer:** a single centered line, 「求道之人，不问寒暑。」. No copyright, email,
-  GitHub, navigation, or rule.
+- **Footer:** one hairline, then a single centered line, 「求道之人，不问寒暑。」.
+  No copyright, email, GitHub, or navigation.
 - **404:** the same quiet paper page.
 
 ## Typography
