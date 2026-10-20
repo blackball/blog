@@ -12,8 +12,8 @@
 ## Context
 
 `blackball` is a Chinese-only personal blog. The owner likes the old extreme-simple
-character of the site: a lotus mark, one sentence, and post titles flowing like a tag
-cloud. At the same time, the reading pages should be as quiet and comfortable as a Kindle,
+character of the site: a lotus mark, one sentence, and a dated index of post titles. At
+the same time, the reading pages should be as quiet and comfortable as a Kindle,
 and a tool should make adding new writing effortless.
 
 ## Goals
@@ -69,8 +69,9 @@ python new_post.py "文章的标题" --serve
 - **Paper:** Kami-style warm parchment `#f5f4ed`, ink `#141413`, four warm neutral
   text levels, cinnabar accent `#9a3b2d` used only for the seal, links, and hover.
 - **Home:** the lotus mark and brush tagline sit in one row (mark on the left, tagline on
-  the right, with a tiny `墨` seal), followed by all post titles as one uniform inline
-  tag cloud. Newest first. No cards, dates, or counts.
+  the right, with a tiny `墨` seal), followed by a vertical two-column index: date on the
+  left, title on the right, newest first. Personal posts show the full date; public-domain
+  essays show their year. Thin warm rules separate rows. No cards or counts.
 - **Article:** the lotus mark and brush title share one row, with the mark on the left;
   the body follows immediately. The date/author line sits at the bottom right. There is
   no return link at the bottom: the mark at the top is the way home.
