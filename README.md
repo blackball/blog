@@ -45,6 +45,29 @@ year: 1925
 正文……
 ```
 
+## 网页版编辑室
+
+除了 `new_post.py`，仓库还带一个本地网页编辑器：
+
+![网页版编辑室](docs/preview-editor.png)
+
+```bash
+python -m pip install -r Editor/requirements.txt
+python Editor/server.py
+```
+
+Windows 下可以直接双击 `Editor/start.cmd`。打开 <http://127.0.0.1:8787/>。
+左侧选择或新建文章，右侧编辑，点「发布」会：
+
+1. 写入或更新 `posts/*.md`；
+2. 调用现有的 `build.py`；
+3. 更新 `index.html`、`html/*.html` 和 `404.html`。
+
+它不会执行 git 命令。你只需要在发布后自行 `git add / commit / push`。
+
+编辑器只绑定 `127.0.0.1`，不会进入 GitHub Pages 发布产物。完整说明见
+[Editor/README.md](Editor/README.md)。
+
 ## 本地预览
 
 需要 Python 3.9+：
@@ -98,6 +121,7 @@ OCR 错字。它们不是学术校勘本；若要正式引用，请以权威版�
 ```text
 build.py                生成器
 new_post.py             新文章创建与预览工具
+Editor/                 本地网页编辑器（Flask + React）
 site.json               站点配置
 posts/                  Markdown 原文
 templates/              base、首页、文章、404 模板
@@ -111,7 +135,7 @@ docs/plans/             设计记录
 ## 说明
 
 - 旧文章 URL 全部保留，包括 `02023-08-06-about.html`。
-- 构建只依赖 `Markdown`。
-- 没有主题切换、目录、进度条、复制按钮或其他前端脚本。
+- 站点构建只依赖 `Markdown`；网页编辑器额外依赖 `Flask`。
+- 文章页面没有主题切换、目录、进度条、复制按钮或其他前端脚本。
 - 字体从 Google Fonts 加载，失败时回退到宋体/楷体，页面仍可读。
 - `update.py` 已被 `build.py` 取代。

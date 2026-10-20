@@ -33,12 +33,17 @@ and a tool should make adding new writing effortless.
 - Tags, search, comments, analytics, or RSS.
 - A JavaScript framework or a general-purpose SSG.
 
-## Authoring tool
+## Authoring tools
 
 `new_post.py` creates a dated Markdown file, writes the title line, and opens the editor.
 It supports optional author/year metadata, a custom slug or date, a no-open mode, an
 automatic build, and an optional local preview. It refuses to overwrite an existing file
 and never commits or pushes automatically.
+
+`Editor/` is a local web editing room: a Flask API plus a React/Vite interface. It reads
+and writes `posts/*.md`, calls `build.py` on publish, serves the generated site at
+`/preview/`, and binds only to `127.0.0.1`. It is excluded from the Pages artifact and
+does not run git commands.
 
 ```bash
 python new_post.py "文章的标题"
