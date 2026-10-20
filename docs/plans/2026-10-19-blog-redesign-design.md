@@ -72,8 +72,8 @@ python new_post.py "文章的标题" --serve
   the right, with a tiny `墨` seal), followed by all post titles as one uniform inline
   tag cloud. Newest first. No cards, dates, or counts.
 - **Article:** the lotus mark and brush title share one row, with the mark on the left;
-  the body follows immediately. The date/author line sits at the bottom right, with the
-  return link at the bottom left.
+  the body follows immediately. The date/author line sits at the bottom right. There is
+  no return link at the bottom: the mark at the top is the way home.
 - **Article measure:** 680px, about 35 Chinese characters per line. Body text is 19px with
   a 1.85 line-height on desktop and 18px with 1.82 on phones.
 - **Rhythm (borrowed from Kami):** body is left-aligned, never justified, with no
