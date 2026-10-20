@@ -61,15 +61,19 @@ python new_post.py "文章的标题" --serve
 
 - The filename supplies the date and URL. Existing URLs are preserved.
 - The first paragraph supplies the page description.
-- The article byline is `author · year` when provided, otherwise the filename date.
+- The article date line is `author · year` when provided, otherwise the filename date,
+  and appears at the bottom right.
 
 ## Layout
 
 - **Paper:** Kami-style warm parchment `#f5f4ed`, ink `#141413`, four warm neutral
   text levels, cinnabar accent `#9a3b2d` used only for the seal, links, and hover.
-- **Home:** small lotus mark, brush tagline with a tiny `墨` seal, then all post titles as
-  one uniform inline tag cloud. Newest first. No cards, dates, or counts.
-- **Article:** small lotus link home, author/year, brush title, prose, one return link.
+- **Home:** the lotus mark and brush tagline sit in one row (mark on the left, tagline on
+  the right, with a tiny `墨` seal), followed by all post titles as one uniform inline
+  tag cloud. Newest first. No cards, dates, or counts.
+- **Article:** the lotus mark and brush title share one row, with the mark on the left;
+  the body follows immediately. The date/author line sits at the bottom right, with the
+  return link at the bottom left.
 - **Article measure:** 680px, about 35 Chinese characters per line. Body text is 19px with
   a 1.85 line-height on desktop and 18px with 1.82 on phones.
 - **Rhythm (borrowed from Kami):** body is left-aligned, never justified, with no
@@ -80,7 +84,8 @@ python new_post.py "文章的标题" --serve
   the site statement and article title.
 - **Chrome:** flat paper, no gradient, no shadows, no decorative rules or side bars,
   no motion. Only one hairline (footer) and one cinnabar seal.
-- **Footer:** copyright, email, GitHub, one hairline rule.
+- **Footer:** a single centered line, 「求道之人，不问寒暑。」. No copyright, email,
+  GitHub, navigation, or rule.
 - **404:** the same quiet paper page.
 
 ## Typography
