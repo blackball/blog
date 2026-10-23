@@ -57,15 +57,24 @@ python Editor/server.py
 ```
 
 Windows 下可以直接双击 `Editor/start.cmd`。打开 <http://127.0.0.1:8787/>。
-左侧选择或新建文章，右侧编辑，点「发布」会：
+编辑器有三个区域：
 
-1. 写入或更新 `posts/*.md`；
+- **文章**：新建、修改、删除文章；可插入图片。
+- **站点**：修改站名、标语、简介、作者、页脚箴言和 404 文案。
+- **图片**：上传图片、复制 Markdown、插入正文、设为站点 logo、删除未被使用的图片。
+
+点「发布」/「保存并发布」会：
+
+1. 写入或更新 `posts/*.md` 或 `site.json`；
 2. 调用现有的 `build.py`；
 3. 更新 `index.html`、`html/*.html` 和 `404.html`。
 
+![图片库](docs/preview-editor-images.png)
+
 它不会执行 git 命令。你只需要在发布后自行 `git add / commit / push`。
 
-编辑器只绑定 `127.0.0.1`，不会进入 GitHub Pages 发布产物。完整说明见
+编辑器只绑定 `127.0.0.1`，不会进入 GitHub Pages 发布产物。图片保存在 `imgs/`，
+支持 PNG、JPG、WebP、GIF，单张不超过 8 MB。完整说明见
 [Editor/README.md](Editor/README.md)。
 
 ## 本地预览
@@ -98,8 +107,12 @@ python build.py
 
 ## 站点配置
 
-编辑 `site.json` 可以改站点标题、标语、简介、作者和页脚箴言。页脚现在只显示
+编辑 `site.json` 可以改站点标题、标语、简介、作者、页脚箴言、404 标题/文案和
+站点 logo。网页编辑器的「站点」和「图片」区域会安全地更新这些字段。页脚默认只显示
 「求道之人，不问寒暑。」。
+
+logo 字段使用相对路径，默认是 `imgs/logo.png`。构建时会给图片加上文件修改时间作为
+缓存版本号，所以更换 logo 后无需手动清缓存。
 
 视觉参数集中在 `assets/css/style.css` 顶部：纸张、墨色、朱砂色、正文宽度。标题字体
 是 **Zhi Mang Xing（志莽行书）**，正文是 **Noto Serif SC**；两者都有本地字体回退。
@@ -124,6 +137,7 @@ new_post.py             新文章创建与预览工具
 Editor/                 本地网页编辑器（Flask + React）
 site.json               站点配置
 posts/                  Markdown 原文
+imgs/                   logo 与文章图片
 templates/              base、首页、文章、404 模板
 assets/css/style.css    纸张版式与字体
 html/                   生成的文章页

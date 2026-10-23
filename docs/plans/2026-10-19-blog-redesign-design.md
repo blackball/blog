@@ -42,8 +42,11 @@ and never commits or pushes automatically.
 
 `Editor/` is a local web editing room: a Flask API plus a React/Vite interface. It reads
 and writes `posts/*.md`, calls `build.py` on publish, serves the generated site at
-`/preview/`, and binds only to `127.0.0.1`. It is excluded from the Pages artifact and
-does not run git commands.
+`/preview/`, and binds only to `127.0.0.1`. Its site panel edits the text fields in
+`site.json` (title, tagline, description, author, footer motto, 404 copy); its image
+library uploads to `imgs/`, inserts Markdown, and can swap the site logo. Images used by
+a post or by the site configuration cannot be deleted. It is excluded from the Pages
+artifact and does not run git commands.
 
 ```bash
 python new_post.py "文章的标题"
