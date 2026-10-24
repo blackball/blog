@@ -164,6 +164,23 @@ main:focus {
   line-height: 1.65;
 }
 
+.seal {
+  display: inline-grid;
+  width: 1.35em;
+  height: 1.35em;
+  margin-left: 0.38em;
+  place-items: center;
+  border-radius: 1px;
+  background: var(--accent);
+  color: var(--paper);
+  font-family: var(--font-serif);
+  font-size: 0.38em;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1;
+  vertical-align: 0.45em;
+}
+
 .post-index-wrap {
   margin-top: clamp(2.4rem, 5vw, 3.2rem);
 }
@@ -622,7 +639,8 @@ main:focus {
   .post-index-wrap,
   .site-footer,
   .back,
-  .skip-link {
+  .skip-link,
+  .seal {
     display: none !important;
   }
 

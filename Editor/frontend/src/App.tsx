@@ -583,7 +583,6 @@ export default function App() {
   if (!ready) {
     return (
       <div className="loading-screen">
-        <span className="loading-seal">墨</span>
         <p>正在打开编辑室……</p>
       </div>
     );
@@ -605,7 +604,6 @@ export default function App() {
     <div className="app">
       <header className="topbar">
         <div className="brand">
-          <span className="brand-seal" aria-hidden="true">墨</span>
           <span className="brand-name">{siteTitle}</span>
           <span className="brand-sub">编辑室</span>
         </div>
@@ -743,7 +741,6 @@ export default function App() {
           <main className="workspace" ref={workspaceRef}>
             {!draft ? (
               <div className="empty-state">
-                <span className="empty-seal" aria-hidden="true">墨</span>
                 <p className="section-kicker">Local writing desk</p>
                 <h1>选择一篇文章</h1>
                 <p className="empty-copy">
@@ -978,9 +975,7 @@ export default function App() {
                 <div className="settings-logo-image">
                   {siteDraft.logo ? (
                     <img src={`/preview/${siteDraft.logo}`} alt="" />
-                  ) : (
-                    <span className="logo-empty">墨</span>
-                  )}
+                  ) : null}
                 </div>
                 <div className="settings-logo-copy">
                   <p>站点印记</p>

@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="blackball seal">
-  <rect width="64" height="64" rx="8" fill="#f7f2e7"/>
-  <rect x="5" y="5" width="54" height="54" rx="3" fill="#a23b2c"/>
-  <rect x="8" y="8" width="48" height="48" rx="1" fill="none" stroke="#f7f2e7" stroke-opacity=".45"/>
-  <text x="32" y="43" text-anchor="middle" font-family="'Noto Serif SC', 'Songti SC', serif" font-size="34" font-weight="600" fill="#f7f2e7">墨</text>
-</svg>

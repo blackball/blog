@@ -97,21 +97,6 @@ textarea:focus-visible {
   gap: 10px;
 }
 
-.brand-seal {
-  display: inline-grid;
-  width: 30px;
-  height: 30px;
-  flex: 0 0 30px;
-  place-items: center;
-  border-radius: 1px;
-  background: var(--accent);
-  color: var(--paper);
-  font-family: var(--serif);
-  font-size: 15px;
-  font-weight: 500;
-  line-height: 1;
-}
-
 .brand-name {
   color: var(--ink);
   font-size: 16px;
@@ -965,12 +950,6 @@ textarea:focus-visible {
   object-fit: cover;
 }
 
-.logo-empty {
-  color: var(--accent);
-  font-family: var(--brush);
-  font-size: 22px;
-}
-
 .settings-logo-copy {
   display: flex;
   min-width: 0;
@@ -1145,20 +1124,6 @@ textarea:focus-visible {
   text-align: center;
 }
 
-.empty-seal {
-  display: inline-grid;
-  width: 42px;
-  height: 42px;
-  place-items: center;
-  margin-bottom: 18px;
-  border-radius: 1px;
-  background: var(--accent);
-  color: var(--paper);
-  font-size: 21px;
-  font-weight: 500;
-  line-height: 1;
-}
-
 .empty-state h1 {
   margin: 8px 0 0;
   color: var(--ink);
@@ -1184,17 +1149,6 @@ textarea:focus-visible {
   padding: 24px;
   color: var(--muted);
   text-align: center;
-}
-
-.loading-seal {
-  display: inline-grid;
-  width: 40px;
-  height: 40px;
-  place-items: center;
-  border-radius: 1px;
-  background: var(--accent);
-  color: var(--paper);
-  font-size: 20px;
 }
 
 .loading-screen p {
