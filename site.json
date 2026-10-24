@@ -1,12 +1,13 @@
 {
-  "title": "blackball",
-  "tagline": "人生是一场精彩的旅程。",
-  "description": "bugway 的个人写作空间，记录生活、创造，以及那些值得慢下来的时刻。",
-  "author": "bugway",
+  "title": "辉之志",
+  "tagline": "唵嘛呢叭咪吽",
+  "description": "认真、勇敢、真诚、空虚以及对抗空虚的努力。",
+  "author": "辉",
   "url": "https://www.bugway.info",
   "language": "zh-CN",
   "footer_motto": "求道之人，不问寒暑。",
   "logo": "imgs/logo.png",
+  "brush_font": "zhi-mang-xing",
   "not_found_title": "这条路径不存在。",
   "not_found_body": "页面可能已经被移走，或者还没有被写下。"
 }

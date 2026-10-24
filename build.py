@@ -22,6 +22,7 @@ from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Any
+from urllib.parse import quote_plus
 
 try:
     import markdown
@@ -49,6 +50,51 @@ PLACEHOLDER_RE = re.compile(r"{{\s*([a-zA-Z0-9_]+)\s*}}")
 HTML_TAG_RE = re.compile(r"<[^>]+>")
 SPACE_RE = re.compile(r"\s+")
 FENCE_RE = re.compile(r"^[ \t]*(```|~~~).*?^[ \t]*\1[ \t]*$", re.M | re.S)
+
+
+BRUSH_FONTS: dict[str, dict[str, Any]] = {
+    "zhi-mang-xing": {
+        "label": "志莽行书",
+        "family": "Zhi Mang Xing",
+        "google": True,
+        "css": '"Zhi Mang Xing", "STKaiti", "KaiTi", "Kaiti SC", "Songti SC", serif',
+    },
+    "ma-shan-zheng": {
+        "label": "马善政毛笔楷书",
+        "family": "Ma Shan Zheng",
+        "google": True,
+        "css": '"Ma Shan Zheng", "STKaiti", "KaiTi", "Kaiti SC", "Songti SC", serif',
+    },
+    "liu-jian-mao-cao": {
+        "label": "柳建毛草",
+        "family": "Liu Jian Mao Cao",
+        "google": True,
+        "css": '"Liu Jian Mao Cao", "STKaiti", "KaiTi", "Kaiti SC", "Songti SC", serif',
+    },
+    "long-cang": {
+        "label": "龙藏",
+        "family": "Long Cang",
+        "google": True,
+        "css": '"Long Cang", "STKaiti", "KaiTi", "Kaiti SC", "Songti SC", serif',
+    },
+    "system-kai": {
+        "label": "系统楷体",
+        "family": "STKaiti",
+        "google": False,
+        "css": '"STKaiti", "KaiTi", "Kaiti SC", "Songti SC", serif',
+    },
+}
+
+
+def font_href(font: dict[str, Any]) -> str:
+    families = ["Noto+Serif+SC:wght@400;500;600"]
+    if font["google"]:
+        families.append(quote_plus(str(font["family"])))
+    return (
+        "https://fonts.googleapis.com/css2?"
+        + "&amp;".join("family=" + family for family in families)
+        + "&amp;display=swap"
+    )
 
 
 class BuildError(Exception):
@@ -218,6 +264,11 @@ def load_config() -> dict[str, Any]:
         raise BuildError("site.json: url must start with http:// or https://")
     config["url"] = str(config["url"]).rstrip("/")
     config.setdefault("logo", "imgs/logo.png")
+    config.setdefault("brush_font", "zhi-mang-xing")
+    if config["brush_font"] not in BRUSH_FONTS:
+        raise BuildError(
+            "site.json: brush_font must be one of: " + ", ".join(BRUSH_FONTS)
+        )
     config.setdefault("not_found_title", "这条路径不存在。")
     config.setdefault("not_found_body", "页面可能已经被移走，或者还没有被写下。")
     return config
@@ -314,6 +365,7 @@ def base_values(
     logo_url = root + logo_rel
     if logo_path.is_file():
         logo_url += f"?v={int(logo_path.stat().st_mtime)}"
+    brush_font = BRUSH_FONTS[config["brush_font"]]
     return {
         "lang": escape(config["language"], quote=False),
         "site_title": escape(config["title"]),
@@ -330,6 +382,8 @@ def base_values(
             quote=False,
         ),
         "logo_url": escape(logo_url),
+        "font_href": font_href(brush_font),
+        "brush_font_css": brush_font["css"],
         "root": root,
         "css_href": root + "assets/css/style.css",
         "favicon_href": root + "assets/favicon.svg",

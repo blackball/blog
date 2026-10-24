@@ -49,8 +49,22 @@ export type SiteConfig = {
   not_found_title: string;
   not_found_body: string;
   logo: string;
+  brush_font: string;
   url: string;
   language: string;
+};
+
+export type FontOption = {
+  id: string;
+  label: string;
+  family: string;
+  css: string;
+  google: boolean;
+};
+
+export type SitePayload = {
+  site: SiteConfig;
+  fonts: FontOption[];
 };
 
 export type ImageItem = {
@@ -168,17 +182,15 @@ export const api = {
     });
   },
 
-  async site(): Promise<SiteConfig> {
-    const data = await request<{ ok: boolean; site: SiteConfig }>("/api/site");
-    return data.site;
+  async site(): Promise<SitePayload> {
+    return request<{ ok: boolean; site: SiteConfig; fonts: FontOption[] }>("/api/site");
   },
 
-  async updateSite(site: SiteConfig): Promise<SiteConfig> {
-    const data = await request<{ ok: boolean; site: SiteConfig }>("/api/site", {
+  async updateSite(site: SiteConfig): Promise<SitePayload> {
+    return request<{ ok: boolean; site: SiteConfig; fonts: FontOption[] }>("/api/site", {
       method: "PUT",
       body: JSON.stringify(site),
     });
-    return data.site;
   },
 
   async setLogo(logo: string): Promise<SiteConfig> {

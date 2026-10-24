@@ -853,13 +853,95 @@ textarea:focus-visible {
   color: var(--faint);
 }
 
+.font-picker {
+  margin-top: 24px;
+  padding: 18px 0 20px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.font-picker-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.font-picker-head h2 {
+  margin: 3px 0 0;
+  color: var(--ink);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.font-picker-head > p {
+  max-width: 280px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.8;
+  text-align: right;
+}
+
+.font-options {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.font-option {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 7px;
+  padding: 11px 12px 10px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: #fbfaf5;
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color 150ms ease,
+    background-color 150ms ease;
+}
+
+.font-option:hover {
+  border-color: var(--line-strong);
+}
+
+.font-option.is-active {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.font-option-sample {
+  display: block;
+  overflow: hidden;
+  width: 100%;
+  color: var(--ink);
+  font-size: 24px;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.font-option-label {
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.5;
+}
+
 .settings-logo {
   display: flex;
   align-items: center;
   gap: 14px;
-  margin-top: 24px;
+  margin-top: 0;
   padding: 16px 0;
-  border-top: 1px solid var(--line);
+  border-top: 0;
   border-bottom: 1px solid var(--line);
 }
 
@@ -1300,6 +1382,25 @@ textarea:focus-visible {
 
   .field-wide {
     grid-column: auto;
+  }
+
+  .font-picker-head {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .font-picker-head > p {
+    max-width: none;
+    text-align: left;
+  }
+
+  .font-options {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .font-option-sample {
+    font-size: 22px;
   }
 
   .settings-logo {

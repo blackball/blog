@@ -269,6 +269,7 @@ SITE_FIELDS = (
     "description",
     "author",
     "footer_motto",
+    "brush_font",
     "not_found_title",
     "not_found_body",
 )
@@ -284,9 +285,27 @@ def read_site() -> dict:
     if not isinstance(data, dict):
         raise ApiError("site.json 顶层必须是对象。", 500)
     data.setdefault("logo", "imgs/logo.png")
+    data.setdefault("brush_font", "zhi-mang-xing")
     data.setdefault("not_found_title", "这条路径不存在。")
     data.setdefault("not_found_body", "页面可能已经被移走，或者还没有被写下。")
     return data
+
+
+def font_options() -> list[dict]:
+    return [
+        {
+            "id": key,
+            "label": font["label"],
+            "family": font["family"],
+            "css": font["css"],
+            "google": font["google"],
+        }
+        for key, font in site_build.BRUSH_FONTS.items()
+    ]
+
+
+def site_response(config: dict):
+    return jsonify({"ok": True, "site": config, "fonts": font_options()})
 
 
 def write_site(config: dict) -> None:
@@ -411,7 +430,7 @@ def bootstrap():
 
 @app.get("/api/site")
 def get_site():
-    return jsonify({"ok": True, "site": read_site()})
+    return site_response(read_site())
 
 
 @app.put("/api/site")
@@ -424,11 +443,13 @@ def update_site():
         value = one_line(data[key], key)
         if key in {"title", "tagline", "description", "author", "footer_motto"} and not value:
             raise ApiError(f"{key} 不能为空。")
+        if key == "brush_font" and value not in site_build.BRUSH_FONTS:
+            raise ApiError("未知的毛笔字体。")
         config[key] = value
     if "logo" in data:
         config["logo"] = validate_logo_path(data["logo"])
     write_site(config)
-    return jsonify({"ok": True, "site": config})
+    return site_response(config)
 
 
 @app.post("/api/site/logo")
@@ -437,7 +458,7 @@ def set_logo():
     config = read_site()
     config["logo"] = validate_logo_path(data.get("logo"))
     write_site(config)
-    return jsonify({"ok": True, "site": config})
+    return site_response(config)
 
 
 @app.get("/api/images")

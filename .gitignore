@@ -4,7 +4,7 @@ __pycache__/
 .source/
 Editor/frontend/node_modules/
 Editor/frontend/.vite/
-.editor-server.out
-.editor-server.err
+.editor*.out
+.editor*.err
 .DS_Store
 Thumbs.db

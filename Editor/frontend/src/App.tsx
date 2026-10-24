@@ -3,6 +3,7 @@ import {
   ApiError,
   api,
   type Draft,
+  type FontOption,
   type ImageItem,
   type PostDetail,
   type PostSummary,
@@ -121,6 +122,7 @@ export default function App() {
   const [status, setStatus] = useState<Status>({ kind: "idle", text: "" });
   const [view, setView] = useState<View>("articles");
   const [siteDraft, setSiteDraft] = useState<SiteConfig | null>(null);
+  const [fonts, setFonts] = useState<FontOption[]>([]);
   const [images, setImages] = useState<ImageItem[]>([]);
 
   const titleRef = useRef<HTMLInputElement>(null);
@@ -138,10 +140,11 @@ export default function App() {
         if (!active) return;
         setSiteTitle(bootstrap.siteTitle);
         setToday(bootstrap.today);
-        const [siteConfig, list] = await Promise.all([api.site(), api.list()]);
+        const [sitePayload, list] = await Promise.all([api.site(), api.list()]);
         if (!active) return;
-        setSiteDraft(siteConfig);
-        setSiteTitle(siteConfig.title);
+        setSiteDraft(sitePayload.site);
+        setFonts(sitePayload.fonts);
+        setSiteTitle(sitePayload.site.title);
         setPosts(list);
         setReady(true);
       } catch (err) {
@@ -310,8 +313,9 @@ export default function App() {
     try {
       const updated = await api.updateSite(siteDraft);
       saved = true;
-      setSiteDraft(updated);
-      setSiteTitle(updated.title);
+      setSiteDraft(updated.site);
+      setFonts(updated.fonts);
+      setSiteTitle(updated.site.title);
       setSiteDirty(false);
       const result = await api.publish();
       await loadImages();
@@ -892,6 +896,32 @@ export default function App() {
                     onChange={(event) => changeSite("not_found_body", event.target.value)}
                   />
                 </label>
+              </div>
+
+              <div className="font-picker">
+                <div className="font-picker-head">
+                  <div>
+                    <p className="section-kicker">Typeface</p>
+                    <h2>毛笔字体</h2>
+                  </div>
+                  <p>全站标语与文章标题统一使用，保存并发布后生效。</p>
+                </div>
+                <div className="font-options">
+                  {fonts.map((font) => (
+                    <button
+                      key={font.id}
+                      type="button"
+                      className={`font-option ${siteDraft.brush_font === font.id ? "is-active" : ""}`}
+                      aria-pressed={siteDraft.brush_font === font.id}
+                      onClick={() => changeSite("brush_font", font.id)}
+                    >
+                      <span className="font-option-sample" style={{ fontFamily: font.css }}>
+                        {siteDraft.tagline || siteDraft.title || "辉之志"}
+                      </span>
+                      <span className="font-option-label">{font.label}</span>
+                    </button>
+                  ))}
+                </div>
               </div>
 
               <div className="settings-logo">

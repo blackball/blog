@@ -94,8 +94,11 @@ python new_post.py "文章的标题" --serve
 
 ## Typography
 
-- **Titles:** **Zhi Mang Xing** (志莽行书), an open-source semi-cursive brush face. Wang
-  Xizhi has no complete modern font; this is the closest practical approximation.
+- **Titles:** a site-wide brush face selectable in the editor. The default is
+  **Zhi Mang Xing** (志莽行书); alternatives are **Ma Shan Zheng**, **Liu Jian Mao Cao**,
+  **Long Cang**, and the local system Kai face. Wang Xizhi has no complete modern font;
+  these are practical approximations.
+  The public site loads only the selected Google font, not all choices.
 - **Body:** **Noto Serif SC**, with Source Han Serif / Songti / SimSun fallbacks.
 - **Code:** system monospace only where code appears.
 - The two webfonts load from Google Fonts with `display=swap`; local fallbacks preserve
