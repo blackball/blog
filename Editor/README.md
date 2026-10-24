@@ -1,8 +1,8 @@
 # blackball 编辑室
 
-本地网页编辑器。它只监听 `127.0.0.1`，读写 `posts/*.md`，点击发布时调用根目录的
-`build.py`，生成或更新 `index.html`、`html/*.html` 和 `404.html`。它不会自动 commit
-或 push。
+本地网页编辑器。默认只监听 `127.0.0.1`，读写 `posts/*.md`，点击发布时调用根目录的
+`build.py`，生成或更新 `index.html`、`html/*.html` 和 `404.html`。
+「推送 GitHub」按钮会构建、提交并推送内容文件。
 
 ## 启动
 
@@ -22,7 +22,37 @@ python Editor/server.py --port 8899
 
 # 不自动打开浏览器
 python Editor/server.py --no-open
+
+# 允许同一 Wi-Fi 下的手机访问
+python Editor/server.py --lan
 ```
+
+## 手机使用
+
+电脑和手机连接同一个 Wi-Fi，然后：
+
+```bash
+python Editor/server.py --lan
+```
+
+Windows 也可以直接双击 `Editor/start-phone.cmd`。启动后终端会打印：
+
+```text
+phone: http://192.168.x.x:8787/
+```
+
+在手机浏览器打开这个地址即可。第一次启动时 Windows 可能询问防火墙权限，选择允许
+“专用网络”。
+
+手机上推荐流程：
+
+1. 编辑文章，点「发布」生成本地页面；
+2. 点顶部「推送 GitHub」；
+3. 编辑器自动构建、commit、push，GitHub Actions 随后更新站点。
+
+「推送 GitHub」会提交 `posts/`、`site.json`、`imgs/`、`html/`、`index.html` 和
+`404.html`。未发布的编辑内容不会被提交，所以请先点「发布」。电脑需要保持开机，
+手机和电脑需要在同一网络；不要在公共 Wi-Fi 下使用 `--lan`。
 
 编辑器顶部有三个区域：
 
@@ -55,6 +85,8 @@ logo 可以在「图片」里更换。
 也会由 `build.py` 注入模板。
 
 快捷键：`Ctrl/Cmd + S` 等同于点击当前区域的「发布」或「保存并发布」。
+「推送 GitHub」会先检查是否有未发布的修改，然后运行构建、`git add`、`git commit`
+和 `git push`。
 
 ## 前端开发
 
@@ -73,7 +105,7 @@ pnpm build    # 重新生成 dist
 
 ## 安全边界
 
-- Flask 只绑定 `127.0.0.1`，不要把它暴露到公网。
+- 默认只绑定 `127.0.0.1`；`--lan` 只应在可信的家庭 Wi-Fi 下使用，不要暴露到公网。
 - 所有写操作都要求启动时生成的随机 token；页面通过 `/api/bootstrap` 获取。
 - 删除和发布都会操作真实本地文件，使用前请确认当前目录是博客仓库。
 - 上传图片只按扩展名和大小校验；请只上传自己的图片。

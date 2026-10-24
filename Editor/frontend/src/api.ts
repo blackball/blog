@@ -40,6 +40,12 @@ export type PublishResult = {
   pages: number;
 };
 
+export type GithubPublishResult = {
+  ok: boolean;
+  pushed: boolean;
+  output: string;
+};
+
 export type SiteConfig = {
   title: string;
   tagline: string;
@@ -177,6 +183,13 @@ export const api = {
 
   async publish(): Promise<PublishResult> {
     return request<PublishResult>("/api/publish", {
+      method: "POST",
+      body: JSON.stringify({}),
+    });
+  },
+
+  async publishGithub(): Promise<GithubPublishResult> {
+    return request<GithubPublishResult>("/api/publish/github", {
       method: "POST",
       body: JSON.stringify({}),
     });

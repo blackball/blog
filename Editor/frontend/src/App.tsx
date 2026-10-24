@@ -117,6 +117,7 @@ export default function App() {
   const [busy, setBusy] = useState(false);
   const [siteBusy, setSiteBusy] = useState(false);
   const [imagesBusy, setImagesBusy] = useState(false);
+  const [gitBusy, setGitBusy] = useState(false);
   const [ready, setReady] = useState(false);
   const [loadError, setLoadError] = useState("");
   const [status, setStatus] = useState<Status>({ kind: "idle", text: "" });
@@ -172,7 +173,7 @@ export default function App() {
   const characterCount = draft ? draft.body.replace(/\s/g, "").length : 0;
   const lineCount = draft ? draft.body.split("\n").length : 0;
   const currentDirty = view === "site" ? siteDirty : view === "articles" ? dirty : false;
-  const anyBusy = busy || siteBusy || imagesBusy;
+  const anyBusy = busy || siteBusy || imagesBusy || gitBusy;
 
   function confirmDiscard(): boolean {
     return !dirty || window.confirm("当前文章还没有发布，确定放弃修改吗？");
@@ -497,6 +498,46 @@ export default function App() {
     }
   }
 
+  async function publishGithub() {
+    if (gitBusy) return;
+    if (dirty || siteDirty) {
+      setStatus({
+        kind: "error",
+        text: "还有未发布的修改。请先点「发布」或「保存并发布」，再推送到 GitHub。",
+      });
+      return;
+    }
+    if (
+      !window.confirm(
+        "将构建并提交当前文章、站点设置、图片和生成的 HTML 到 GitHub。继续吗？",
+      )
+    ) {
+      return;
+    }
+    setGitBusy(true);
+    setStatus({ kind: "working", text: "正在构建、提交并推送到 GitHub……" });
+    try {
+      const result = await api.publishGithub();
+      await refreshPosts();
+      setStatus({
+        kind: "ok",
+        text: result.pushed
+          ? "已提交并推送到 GitHub。"
+          : "没有需要提交的内容，本地已经是最新的。",
+        log: result.output,
+      });
+    } catch (err) {
+      const error = errorMessage(err);
+      setStatus({
+        kind: "error",
+        text: error.message,
+        log: error.log ?? error.message,
+      });
+    } finally {
+      setGitBusy(false);
+    }
+  }
+
   async function copyImageMarkdown(image: ImageItem) {
     try {
       await copyText(image.markdown);
@@ -603,6 +644,15 @@ export default function App() {
           <a className="ghost-btn" href="/preview/" target="_blank" rel="noreferrer">
             预览站点 <span aria-hidden="true">↗</span>
           </a>
+          <button
+            className="ghost-btn"
+            type="button"
+            onClick={publishGithub}
+            disabled={gitBusy}
+            title="构建并提交当前内容到 GitHub"
+          >
+            {gitBusy ? "推送中……" : "推送 GitHub"}
+          </button>
           {view === "articles" && (
             <button
               className="primary-btn"

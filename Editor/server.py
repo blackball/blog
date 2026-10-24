@@ -16,11 +16,14 @@ import json
 import os
 import re
 import secrets
+import shutil
+import socket
 import subprocess
 import sys
 import threading
 import webbrowser
 from datetime import date as Date
+from datetime import datetime
 from pathlib import Path
 from urllib.parse import quote
 
@@ -261,6 +264,92 @@ def run_build() -> tuple[bool, str, int, int]:
     post_count = len(list(POSTS_DIR.glob("*.md")))
     page_count = len(list((ROOT / "html").glob("*.html"))) + 2
     return process.returncode == 0, output, post_count, page_count
+
+
+CONTENT_PATHS = ("posts", "site.json", "imgs", "html", "index.html", "404.html")
+
+
+def git_run(args: list[str]) -> subprocess.CompletedProcess[str]:
+    env = os.environ.copy()
+    env["PYTHONIOENCODING"] = "utf-8"
+    env["GIT_TERMINAL_PROMPT"] = "0"
+    git = shutil.which("git")
+    if not git:
+        raise ApiError("找不到 git 命令，无法推送到 GitHub。", 500)
+    return subprocess.run(
+        [git, *args],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+        timeout=120,
+        env=env,
+    )
+
+
+def run_publish_to_github() -> tuple[bool, bool, str]:
+    ok, build_output, _posts, _pages = run_build()
+    if not ok:
+        return False, False, build_output
+
+    try:
+        added = git_run(["add", "-A", "--", *CONTENT_PATHS])
+    except (ApiError, subprocess.TimeoutExpired) as exc:
+        return False, False, str(exc)
+    if added.returncode != 0:
+        return False, False, ((added.stdout or "") + (added.stderr or "")).strip()
+
+    try:
+        staged = git_run(["diff", "--cached", "--quiet"])
+    except (ApiError, subprocess.TimeoutExpired) as exc:
+        return False, False, str(exc)
+    if staged.returncode == 0:
+        return True, False, build_output + "\n\n没有需要提交的内容。"
+    if staged.returncode != 1:
+        return False, False, ((staged.stdout or "") + (staged.stderr or "")).strip()
+
+    stamp = datetime.now().strftime("%Y-%m-%d %H:%M")
+    try:
+        committed = git_run(
+            ["commit", "-m", f"content: publish from editor {stamp}"]
+        )
+    except (ApiError, subprocess.TimeoutExpired) as exc:
+        return False, False, str(exc)
+    if committed.returncode != 0:
+        return False, False, ((committed.stdout or "") + (committed.stderr or "")).strip()
+
+    try:
+        pushed = git_run(["push", "origin", "HEAD"])
+    except (ApiError, subprocess.TimeoutExpired) as exc:
+        return False, False, ((committed.stdout or "") + str(exc)).strip()
+    if pushed.returncode != 0:
+        return (
+            False,
+            False,
+            ((committed.stdout or "") + (pushed.stdout or "") + (pushed.stderr or "")).strip(),
+        )
+
+    output = "\n\n".join(
+        part
+        for part in (
+            build_output,
+            (committed.stdout or "").strip(),
+            (pushed.stdout or "").strip(),
+            (pushed.stderr or "").strip(),
+        )
+        if part
+    )
+    return True, True, output
+
+
+def local_ip() -> str:
+    try:
+        with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
+            sock.connect(("8.8.8.8", 80))
+            return str(sock.getsockname()[0])
+    except OSError:
+        return "127.0.0.1"
 
 
 SITE_FIELDS = (
@@ -568,6 +657,15 @@ def publish():
     return editor_response_status(ok, output, post_count, page_count)
 
 
+@app.post("/api/publish/github")
+def publish_github():
+    ok, pushed, output = run_publish_to_github()
+    return (
+        jsonify({"ok": ok, "pushed": pushed, "output": output}),
+        (200 if ok else 500),
+    )
+
+
 def editor_index():
     if not (DIST_DIR / "index.html").is_file():
         return (
@@ -619,6 +717,7 @@ def editor_asset(filename: str):
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Run the local blackball editor.")
     parser.add_argument("--port", type=int, default=8787)
+    parser.add_argument("--lan", action="store_true", help="allow phones on the same Wi-Fi")
     parser.add_argument("--no-open", action="store_true")
     args = parser.parse_args(argv)
 
@@ -629,14 +728,21 @@ def main(argv: list[str] | None = None) -> int:
             file=sys.stderr,
         )
 
-    url = f"http://127.0.0.1:{args.port}/"
-    print(f"editor: {url}")
+    local_url = f"http://127.0.0.1:{args.port}/"
+    host = "127.0.0.1"
+    print(f"editor: {local_url}")
+    if args.lan:
+        host = "0.0.0.0"
+        print(f"phone: http://{local_ip()}:{args.port}/")
+        print("same Wi-Fi only; allow Python through Windows Firewall if prompted")
+    else:
+        print("bound to 127.0.0.1 only; use --lan for phone access")
     print("preview: /preview/ (available after starting)")
-    print("bound to 127.0.0.1 only; press Ctrl+C to stop")
+    print("press Ctrl+C to stop")
     if not args.no_open:
-        threading.Timer(0.8, lambda: webbrowser.open(url)).start()
+        threading.Timer(0.8, lambda: webbrowser.open(local_url)).start()
     app.run(
-        host="127.0.0.1",
+        host=host,
         port=args.port,
         debug=False,
         use_reloader=False,

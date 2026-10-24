@@ -55,6 +55,16 @@ python Editor/server.py
 ```
 
 Windows 下可以直接双击 `Editor/start.cmd`。打开 <http://127.0.0.1:8787/>。
+
+想在手机上使用，双击 `Editor/start-phone.cmd`，或运行：
+
+```bash
+python Editor/server.py --lan
+```
+
+手机和电脑连同一个 Wi-Fi，打开终端打印的 `http://192.168.x.x:8787/`。编辑后先点
+「发布」，再点「推送 GitHub」，编辑器会自动构建、commit、push。电脑需要保持开机。
+
 编辑器有三个区域：
 
 - **文章**：新建、修改、删除文章；可插入图片。
