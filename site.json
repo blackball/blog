@@ -1,13 +1,13 @@
 {
   "title": "辉之志",
   "tagline": "唵嘛呢叭咪吽",
-  "description": "认真、勇敢、真诚、空虚以及对抗空虚的努力。",
+  "description": "偶尔过来记录一下对生活的想象。",
   "author": "辉",
   "url": "https://www.bugway.info",
   "language": "zh-CN",
   "footer_motto": "求道之人，不问寒暑。",
   "logo": "imgs/logo.png",
-  "brush_font": "long-cang",
+  "brush_font": "system-kai",
   "not_found_title": "这条路径不存在。",
   "not_found_body": "页面可能已经被移走，或者还没有被写下。"
 }
