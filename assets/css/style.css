@@ -602,6 +602,13 @@ main:focus {
     line-height: 1.82;
   }
 
+  .prose p,
+  .prose li {
+    text-align: justify;
+    text-justify: inter-ideograph;
+    text-align-last: left;
+  }
+
   .prose p {
     margin-bottom: 0.8em;
   }
