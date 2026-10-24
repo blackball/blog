@@ -3,12 +3,6 @@
 > Status: approved 2026-10-20
 > Direction: **warm paper, Kindle-like Chinese reading, brush titles**
 
-## Preview
-
-![Homepage](../preview-home.png)
-
-![Article page](../preview-post.png)
-
 ## Context
 
 `blackball` is a Chinese-only personal blog. The owner likes the old extreme-simple
@@ -24,8 +18,8 @@ and a tool should make adding new writing effortless.
    generous margins, no interface chrome, no client-side JavaScript.
 3. Use a brush display face close in spirit to Wang Xizhi, paired with a dependable
    long-form body face.
-4. Fill the blog with 30 complete public-domain modern Chinese essays to test the real
-   reading experience, while keeping the owner's seven posts.
+4. Test the reading experience with a set of public-domain essays, then remove those
+   temporary texts before publishing.
 
 ## Non-goals
 
@@ -50,7 +44,7 @@ artifact and does not run git commands.
 
 ```bash
 python new_post.py "文章的标题"
-python new_post.py "背影" --author 朱自清 --year 1925
+python new_post.py "新文章" --author 你 --year 2026
 python new_post.py "文章的标题" --serve
 ```
 
@@ -62,8 +56,8 @@ python new_post.py "文章的标题" --serve
 
   ```markdown
   ---
-  author: 朱自清
-  year: 1925
+  author: 你
+  year: 2026
   ---
   ```
 
@@ -107,20 +101,11 @@ python new_post.py "文章的标题" --serve
 - The two webfonts load from Google Fonts with `display=swap`; local fallbacks preserve
   readability when the request fails.
 
-## Sample essays
+## Content
 
-Thirty complete public-domain modern Chinese essays are included alongside the original
-seven posts (37 total):
-
-- 鲁迅 8
-- 朱自清 8
-- 郁达夫 7
-- 周作人 7
-
-The texts come from public-domain ebook collections. Web watermarks, chapter page breaks,
-editorial notes, inline footnotes, and obvious OCR errors were removed or normalized.
-They are for layout testing and reading, not scholarly citation; a critical edition should
-be consulted for formal quotation.
+The published site keeps the owner's seven original posts. Thirty public-domain essays
+were used only as temporary layout tests; those posts and their generated pages were
+removed before the repository was cleaned up. The design does not depend on them.
 
 ## Build and publishing
 
@@ -134,9 +119,9 @@ Build and deployment → Source: GitHub Actions**.
 
 ## Verification
 
-- 37 posts, 39 pages, all internal links and preserved URLs.
-- 30-essay audit: title, author, year, length, and residue checks.
+- 7 posts, 9 pages, all internal links and preserved URLs.
 - Browser checks at 320, 390, 768, 1024, 1440, and 1920px with no horizontal overflow.
 - Brush and body webfont checks, long and short brush titles, desktop and mobile reading.
 - `new_post.py` creation, front matter, editor handoff, overwrite protection, and preview.
-- Build failure and stale-page cleanup.
+- Editor article/site/image operations and mobile layout.
+- Build failure, stale-page cleanup, and removal of temporary essays.

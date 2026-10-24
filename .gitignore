@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+.dsh-tmp/
+.source/
+Editor/frontend/node_modules/
+Editor/frontend/.vite/
+.editor-server.out
+.editor-server.err
+.DS_Store
+Thumbs.db

@@ -18,7 +18,7 @@ python new_post.py "文章的标题"
 或记事本打开。需要作者和年份时：
 
 ```bash
-python new_post.py "背影" --author 朱自清 --year 1925
+python new_post.py "新文章" --author 你 --year 2026
 ```
 
 工具会拒绝覆盖同名文件。常用参数：
@@ -36,11 +36,11 @@ python new_post.py "背影" --author 朱自清 --year 1925
 
 ```markdown
 ---
-author: 朱自清
-year: 1925
+author: 你
+year: 2026
 ---
 
-## 背影
+## 新文章
 
 正文……
 ```
@@ -48,8 +48,6 @@ year: 1925
 ## 网页版编辑室
 
 除了 `new_post.py`，仓库还带一个本地网页编辑器：
-
-![网页版编辑室](docs/preview-editor.png)
 
 ```bash
 python -m pip install -r Editor/requirements.txt
@@ -68,8 +66,6 @@ Windows 下可以直接双击 `Editor/start.cmd`。打开 <http://127.0.0.1:8787
 1. 写入或更新 `posts/*.md` 或 `site.json`；
 2. 调用现有的 `build.py`；
 3. 更新 `index.html`、`html/*.html` 和 `404.html`。
-
-![图片库](docs/preview-editor-images.png)
 
 它不会执行 git 命令。你只需要在发布后自行 `git add / commit / push`。
 
@@ -116,18 +112,6 @@ logo 字段使用相对路径，默认是 `imgs/logo.png`。构建时会给图�
 
 视觉参数集中在 `assets/css/style.css` 顶部：纸张、墨色、朱砂色、正文宽度。标题字体
 是 **Zhi Mang Xing（志莽行书）**，正文是 **Noto Serif SC**；两者都有本地字体回退。
-
-## 30 篇公版散文
-
-站内现有的 30 篇现代散文用于真实内容下的版式测试，保留了你原有的 7 篇文章，共 37 篇：
-
-- 鲁迅 8 篇
-- 朱自清 8 篇
-- 郁达夫 7 篇
-- 周作人 7 篇
-
-这些都是公版作品，文本从公版电子文集整理，清除了网页水印、页眉、编者按和明显的
-OCR 错字。它们不是学术校勘本；若要正式引用，请以权威版本核对。
 
 ## 目录
 
